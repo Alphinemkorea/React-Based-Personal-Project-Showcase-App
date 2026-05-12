@@ -1,0 +1,15 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Sample Product",
+      "description": "This is a sample product",
+      "price": 99.99,
+      "category": "electronics",
+      "stock": 10,
+      "image_url": "https://via.placeholder.com/300",
+      "rating": 4.5
+    }
+  ],
+  "orders": []
+}
