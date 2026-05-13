@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { products as initialProducts } from "../../products/products";
+import { products as initialProducts } from "../../components/products/products";
 
 export default function AdminDashboard() {
     const [products, setProducts] = useState(initialProducts);

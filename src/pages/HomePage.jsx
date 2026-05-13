@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import { products } from "../products/products";
+import { products } from "../components/products/products";
 
 export default function HomePage() {
-    const featuredProducts = products.slice(0, 3);
+    const featuredProducts = products?.slice(0, 3) || [];
 
     return (
         <div>
             {/* HERO SECTION */}
             <section className="hero">
                 <div className="hero-text">
-                    <h1>Build Your Ultimate Gaming Setup </h1>
+                    <h1>Build Your Ultimate Gaming Setup 🎮</h1>
 
                     <p>
                         Shop high-performance gaming PCs, GPUs,

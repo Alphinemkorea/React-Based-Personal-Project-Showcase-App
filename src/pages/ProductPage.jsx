@@ -1,26 +1,45 @@
 import { useParams } from "react-router-dom";
 import useCart from "../hooks/useCart";
-import { products } from "../data/products";
+import { products } from "../components/products/products";
 
 export default function ProductPage() {
     const { id } = useParams();
     const { addToCart } = useCart();
 
-    const product = products.find((p) => p.id === parseInt(id));
+    // FIND PRODUCT
+    const product = products.find(
+        (p) => p.id === Number(id)
+    );
 
-    if (!product) return <h2>Product not found</h2>;
+    // IF PRODUCT DOESN'T EXIST
+    if (!product) {
+        return <h2>Product not found</h2>;
+    }
 
     return (
-        <div className="card">
-            <img src={product.image} alt={product.name} className="product-img" />
+        <div className="product-page">
+            {/* IMAGE */}
+            <div className="product-page-image">
+                <img
+                    src={product.image}
+                    alt={product.name}
+                />
+            </div>
 
-            <h1>{product.name}</h1>
-            <p>{product.description}</p>
-            <h2>${product.price}</h2>
+            {/* DETAILS */}
+            <div className="product-page-details">
+                <h1>{product.name}</h1>
 
-            <button onClick={() => addToCart(product)}>
-                Add to Cart
-            </button>
+                <p className="product-description">
+                    {product.description}
+                </p>
+
+                <h2>${product.price}</h2>
+
+                <button onClick={() => addToCart(product)}>
+                    Add to Cart
+                </button>
+            </div>
         </div>
     );
 }

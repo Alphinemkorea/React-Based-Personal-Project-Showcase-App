@@ -1,46 +1,39 @@
 import { Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
 
-import Navigation from "./components/common/Navigation";
-import Cart from "./components/cart/Cart";
-
+// Pages
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
+import AdminPage from "./pages/AdminPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ProductPage from "./pages/ProductPage";
-import AdminPage from "./pages/AdminPage";
 
-import useCart from "./hooks/useCart";
+// Layout Components
+import Header from "./components/common/Header";
+import Footer from "./components/common/Footer.jsx";
+import Cart from "./components/cart/Cart";
 
 export default function App() {
-  const { isCartOpen, darkMode } = useCart();
-
-  useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  }, [darkMode]);
-
   return (
     <>
-      <Navigation />
+      {/* TOP NAVIGATION */}
+      <Header />
+
+      {/* CART DRAWER (GLOBAL) */}
       <Cart />
 
-      <div className={`page-wrapper ${isCartOpen ? "shift" : ""}`}>
-        <div className="page">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/admin" element={<AdminPage />} />
-          </Routes>
-        </div>
-      </div>
+      {/* ROUTES */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/shop" element={<ShopPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+      </Routes>
+
+      {/* FOOTER */}
+      <Footer />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useCart from "../hooks/useCart";
 import { Link } from "react-router-dom";
-import { products } from "../products/products";
+import { products } from "../components/products/products";
 
 export default function ShopPage() {
   const { addToCart } = useCart();
