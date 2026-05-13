@@ -1,11 +1,12 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import ProductTable from './ProductTable';
 
+// This is the main admin dashboard component
 const AdminDashboard = () => {
-  // Sidebar open/close state for responsive admin layout
+  // State to control if the sidebar is open or closed
   const [isOpen, setIsOpen] = useState(true);
 
-  // Example product inventory passed into the table component
+  // Sample list of products for the dashboard
   const products = [
     {
       id: 1,
@@ -41,35 +42,31 @@ const AdminDashboard = () => {
     },
   ];
 
-  // Derive dashboard statistics from the product inventory
-  const stats = useMemo(
-    () => [
-      { id: 1, title: 'Total products', value: products.length },
-      {
-        id: 2,
-        title: 'Low stock items',
-        value: products.filter((product) => product.stock < 10).length,
-      },
-      {
-        id: 3,
-        title: 'Published products',
-        value: products.filter((product) => product.status === 'active').length,
-      },
-    ],
-    [products]
-  );
+  // Calculate stats from the products list
+  const totalProducts = products.length;
+  const lowStockItems = products.filter((product) => product.stock < 10).length;
+  const publishedProducts = products.filter((product) => product.status === 'active').length;
 
+  // Stats array for display
+  const stats = [
+    { id: 1, title: 'Total products', value: totalProducts },
+    { id: 2, title: 'Low stock items', value: lowStockItems },
+    { id: 3, title: 'Published products', value: publishedProducts },
+  ];
+
+  // Function to toggle the sidebar open/close
   const toggleSidebar = () => {
-    setIsOpen((current) => !current);
+    setIsOpen(!isOpen);
   };
 
+  // Function to handle actions on products (like edit or remove)
   const handleProductAction = (actionType, product) => {
-    // Placeholder action handler for edit/remove buttons
     console.log(`Action: ${actionType} on ${product.name}`);
   };
 
   return (
     <div className={`admin-dashboard ${isOpen ? '' : 'sidebar-collapsed'}`}>
+      {/* Sidebar section */}
       <aside className="admin-sidebar">
         <div className="sidebar-brand">Admin Panel</div>
         <nav className="sidebar-nav">
@@ -79,7 +76,9 @@ const AdminDashboard = () => {
         </nav>
       </aside>
 
+      {/* Main content area */}
       <main className="admin-main">
+        {/* Header with toggle button */}
         <header className="dashboard-header">
           <button type="button" className="sidebar-toggle" onClick={toggleSidebar}>
             {isOpen ? 'Hide menu' : 'Show menu'}
@@ -90,6 +89,7 @@ const AdminDashboard = () => {
           </div>
         </header>
 
+        {/* Stats cards section */}
         <section className="dashboard-stats">
           {stats.map((item) => (
             <article key={item.id} className="stat-card">
@@ -99,6 +99,7 @@ const AdminDashboard = () => {
           ))}
         </section>
 
+        {/* Product table section */}
         <section className="dashboard-table" id="products">
           <h2>Product inventory</h2>
           <ProductTable products={products} onAction={handleProductAction} />
