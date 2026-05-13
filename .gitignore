@@ -23,6 +23,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
 =======
 # Dependencies
 node_modules/
@@ -105,3 +106,5 @@ out/
 # Optional: Ignore Vite specific
 .vite/
 >>>>>>> df06e81d32b34a3f5e3109501a89a788d3ac6af4
+=======
+>>>>>>> 9175b6fb1cfff23172d91ccc5fcfd912fc836d05
