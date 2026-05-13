@@ -1,29 +1,25 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 
+// This component shows a table of products with search and filter options
 const ProductTable = ({ products = [], onAction = () => {} }) => {
-  // Local search state for filtering product rows by name or category
+  // State for the search text
   const [search, setSearch] = useState('');
-  // Local status filter state to toggle between active, archived, and all products
+  // State for the status filter
   const [statusFilter, setStatusFilter] = useState('all');
 
-  // Memoize the filtered product list so this filter logic only runs when inputs change
-  const filteredProducts = useMemo(() => {
-    const normalizedSearch = search.trim().toLowerCase();
-
-    return products.filter((product) => {
-      const matchesSearch =
-        product.name.toLowerCase().includes(normalizedSearch) ||
-        product.category.toLowerCase().includes(normalizedSearch);
-
-      const matchesStatus =
-        statusFilter === 'all' || product.status === statusFilter;
-
-      return matchesSearch && matchesStatus;
-    });
-  }, [products, search, statusFilter]);
+  // Filter the products based on search and status
+  const filteredProducts = products.filter((product) => {
+    const searchLower = search.toLowerCase();
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchLower) ||
+      product.category.toLowerCase().includes(searchLower);
+    const matchesStatus = statusFilter === 'all' || product.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   return (
     <div className="product-table-section">
+      {/* Controls for search and filter */}
       <div className="table-controls">
         <div className="search-control">
           <label htmlFor="search" className="label">
@@ -56,6 +52,7 @@ const ProductTable = ({ products = [], onAction = () => {} }) => {
         </div>
       </div>
 
+      {/* The product table */}
       <table className="product-table">
         <thead>
           <tr>
@@ -104,6 +101,7 @@ const ProductTable = ({ products = [], onAction = () => {} }) => {
         </tbody>
       </table>
 
+      {/* Summary of how many products are shown */}
       <div className="table-summary">
         <p>
           Showing {filteredProducts.length} of {products.length} products.
