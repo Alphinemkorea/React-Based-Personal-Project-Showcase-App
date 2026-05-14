@@ -18,7 +18,7 @@ export default function Cart() {
       <div className="cart-header">
         <h2>Cart</h2>
 
-        <button onClick={toggleCart}>
+        <button type="button" className="icon-button" onClick={toggleCart}>
           X
         </button>
       </div>
@@ -37,15 +37,15 @@ export default function Cart() {
           </div>
 
           <div>
-            <button onClick={() => decreaseQty(item.id)}>
+              <button type="button" className="icon-button" onClick={() => decreaseQty(item.id)}>
               -
             </button>
 
-            <span style={{ margin: "0 10px" }}>
+            <span className="quantity-value">
               {item.qty}
             </span>
 
-            <button onClick={() => increaseQty(item.id)}>
+            <button type="button" className="icon-button" onClick={() => increaseQty(item.id)}>
               +
             </button>
           </div>
@@ -63,12 +63,7 @@ export default function Cart() {
           </button>
 
           <Link to="/checkout">
-            <button
-              style={{
-                width: "100%",
-                marginTop: "10px",
-              }}
-            >
+            <button type="button" className="cart-action">
               Proceed to Checkout
             </button>
           </Link>

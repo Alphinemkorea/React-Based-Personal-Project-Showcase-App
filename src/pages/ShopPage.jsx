@@ -21,12 +21,7 @@ export default function ShopPage() {
         placeholder="Search GPU, PC, RAM..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        style={{
-          padding: "10px",
-          width: "100%",
-          maxWidth: "400px",
-          marginTop: "10px",
-        }}
+        className="search-input"
       />
 
       {/* PRODUCTS */}

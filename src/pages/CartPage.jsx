@@ -10,7 +10,7 @@ export default function CartPage() {
     } = useCart();
 
     return (
-        <div>
+        <div className="cart-page">
             <h1>Your Cart </h1>
 
             {cart.length === 0 && <p>Cart is empty</p>}
@@ -20,14 +20,14 @@ export default function CartPage() {
                     <h3>{item.name}</h3>
                     <p>${item.price}</p>
 
-                    <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                        <button onClick={() => decreaseQty(item.id)}>
+                    <div className="cart-quantity-controls">
+                        <button type="button" className="icon-button" onClick={() => decreaseQty(item.id)}>
                             -
                         </button>
 
                         <span>{item.qty}</span>
 
-                        <button onClick={() => increaseQty(item.id)}>
+                        <button type="button" className="icon-button" onClick={() => increaseQty(item.id)}>
                             +
                         </button>
                     </div>
