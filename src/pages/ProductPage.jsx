@@ -4,21 +4,19 @@ import { products } from "../components/products/products";
 
 export default function ProductPage() {
     const { id } = useParams();
+
     const { addToCart } = useCart();
 
-    // FIND PRODUCT
     const product = products.find(
         (p) => p.id === Number(id)
     );
 
-    // IF PRODUCT DOESN'T EXIST
     if (!product) {
-        return <h2>Product not found</h2>;
+        return <h2>Product Not Found</h2>;
     }
 
     return (
         <div className="product-page">
-            {/* IMAGE */}
             <div className="product-page-image">
                 <img
                     src={product.image}
@@ -26,18 +24,15 @@ export default function ProductPage() {
                 />
             </div>
 
-            {/* DETAILS */}
             <div className="product-page-details">
                 <h1>{product.name}</h1>
 
-                <p className="product-description">
-                    {product.description}
-                </p>
+                <p>{product.description}</p>
 
                 <h2>${product.price}</h2>
 
                 <button onClick={() => addToCart(product)}>
-                    Add to Cart
+                    Add To Cart
                 </button>
             </div>
         </div>

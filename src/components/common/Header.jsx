@@ -1,16 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Navigation from './Navigation';
+import { Link } from "react-router-dom";
+import useCart from "../../hooks/useCart";
 
-const Header = () => {
+export default function Header() {
+  const { cart } = useCart();
+
   return (
-    <header className="header">
-      <div className="container">
-        <Link to="/" className="logo">TechHaven</Link>
-        <Navigation />
-      </div>
-    </header>
-  );
-};
+    <nav>
+      <h2>Gaming Tech Store 🎮</h2>
 
-export default Header;
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/shop">Shop</Link>
+        <Link to="/admin">Admin</Link>
+        <Link to="/cart">
+          Cart ({cart.length})
+        </Link>
+      </div>
+    </nav>
+  );
+}
