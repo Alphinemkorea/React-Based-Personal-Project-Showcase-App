@@ -42,7 +42,7 @@ export default function Cart() {
             </button>
 
             <span style={{ margin: "0 10px" }}>
-              {item.qty}
+              {item.quantity}
             </span>
 
             <button onClick={() => increaseQty(item.id)}>

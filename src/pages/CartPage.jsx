@@ -25,14 +25,14 @@ export default function CartPage() {
                             -
                         </button>
 
-                        <span>{item.qty}</span>
+                        <span>{item.quantity}</span>
 
                         <button onClick={() => increaseQty(item.id)}>
                             +
                         </button>
                     </div>
 
-                    <p>Total: ${item.price * item.qty}</p>
+                    <p>Total: ${item.price * item.quantity}</p>
                 </div>
             ))}
 
