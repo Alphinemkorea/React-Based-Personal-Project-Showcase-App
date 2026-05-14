@@ -4,75 +4,56 @@ import useCart from "../../hooks/useCart";
 export default function Cart() {
   const {
     cart,
-    isCartOpen,
-    toggleCart,
-    increaseQty,
-    decreaseQty,
-    cartTotal,
-    clearCart,
+    removeFromCart,
+    cartOpen,
+    setCartOpen,
+    getTotal,
   } = useCart();
 
   return (
-    <div className={`cart-drawer ${isCartOpen ? "open" : ""}`}>
-      {/* HEADER */}
+    <div className={`cart-drawer ${cartOpen ? "open" : ""}`}>
       <div className="cart-header">
-        <h2>Cart</h2>
+        <h2>Your Cart</h2>
 
-        <button onClick={toggleCart}>
+        <button onClick={() => setCartOpen(false)}>
           X
         </button>
       </div>
 
-      {/* EMPTY CART */}
-      {cart.length === 0 && (
+      {cart.length === 0 ? (
         <p>Cart is empty</p>
+      ) : (
+        cart.map((item, index) => (
+          <div className="cart-item" key={index}>
+            <img src={item.image} />
+
+            <div>
+              <h4>{item.name}</h4>
+              <p>${item.price}</p>
+
+              <button
+                onClick={() =>
+                  removeFromCart(item.id)
+                }
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        ))
       )}
 
-      {/* CART ITEMS */}
-      {cart.map((item) => (
-        <div className="cart-item" key={item.id}>
-          <div>
-            <p>{item.name}</p>
-            <span>${item.price}</span>
-          </div>
-
-          <div>
-            <button onClick={() => decreaseQty(item.id)}>
-              -
-            </button>
-
-            <span style={{ margin: "0 10px" }}>
-              {item.quantity}
-            </span>
-
-            <button onClick={() => increaseQty(item.id)}>
-              +
-            </button>
-          </div>
-        </div>
-      ))}
-
-      {/* TOTAL */}
-      <h3>Total: ${cartTotal}</h3>
-
-      {/* ACTIONS */}
+      {/* TOTAL PRICE */}
       {cart.length > 0 && (
-        <>
-          <button onClick={clearCart}>
-            Clear Cart
-          </button>
+        <div className="cart-total">
+          <h3>Total: ${getTotal()}</h3>
 
           <Link to="/checkout">
-            <button
-              style={{
-                width: "100%",
-                marginTop: "10px",
-              }}
-            >
-              Proceed to Checkout
+            <button className="checkout-btn">
+              Proceed To Checkout
             </button>
           </Link>
-        </>
+        </div>
       )}
     </div>
   );

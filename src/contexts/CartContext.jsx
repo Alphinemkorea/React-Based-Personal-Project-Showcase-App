@@ -1,99 +1,54 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
+export default function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
-  const [isCartOpen, setCartOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
-  const toggleCart = () => {
-    setCartOpen((open) => !open);
-  };
-
+  //  ADD PRODUCT
   const addToCart = (product) => {
-    const existingItem = cart.find((item) => item.id === product.id);
+    setCart((prev) => [...prev, product]);
+    setCartOpen(true);
+  };
 
-    if (existingItem) {
-      setCart(
-        cart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
-      );
+  //  REMOVE PRODUCT
+  const removeFromCart = (id) => {
+    setCart((prev) =>
+      prev.filter((item) => item.id !== id)
+    );
+  };
+
+  //  TOTAL PRICE
+  const getTotal = () => {
+    return cart.reduce(
+      (sum, item) => sum + item.price,
+      0
+    );
+  };
+
+  // body class for drawer animation
+  useEffect(() => {
+    if (cartOpen) {
+      document.body.classList.add("cart-open");
     } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
+      document.body.classList.remove("cart-open");
     }
-  };
-
-  const removeFromCart = (productId) => {
-    setCart(cart.filter((item) => item.id !== productId));
-  };
-
-  const updateQuantity = (productId, quantity) => {
-    if (quantity <= 0) {
-      removeFromCart(productId);
-    } else {
-      setCart(
-        cart.map((item) =>
-          item.id === productId ? { ...item, quantity } : item
-        )
-      );
-    }
-  };
-
-  const increaseQty = (productId) => {
-    const product = cart.find((item) => item.id === productId);
-    if (!product) return;
-    updateQuantity(productId, product.quantity + 1);
-  };
-
-  const decreaseQty = (productId) => {
-    const product = cart.find((item) => item.id === productId);
-    if (!product) return;
-    updateQuantity(productId, product.quantity - 1);
-  };
-
-  const clearCart = () => {
-    setCart([]);
-  };
-
-  const getCartTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
-
-  const getCartCount = () => {
-    return cart.reduce((count, item) => count + item.quantity, 0);
-  };
+  }, [cartOpen]);
 
   return (
     <CartContext.Provider
       value={{
         cart,
-        isCartOpen,
-        toggleCart,
+        setCart,
         addToCart,
         removeFromCart,
-        updateQuantity,
-        increaseQty,
-        decreaseQty,
-        clearCart,
-        cartTotal: getCartTotal(),
-        getCartTotal,
-        getCartCount,
+        cartOpen,
+        setCartOpen,
+        getTotal,
       }}
     >
       {children}
     </CartContext.Provider>
   );
-};
-
-export const useCart = () => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error('useCart must be used within a CartProvider');
-  }
-  return context;
-};
-
-export default CartProvider;
+}
