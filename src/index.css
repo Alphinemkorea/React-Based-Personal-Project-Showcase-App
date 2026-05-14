@@ -203,6 +203,35 @@ input:focus {
   box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.2);
 }
 
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0 0;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 520px;
+  padding: 1rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 12px 30px rgba(0, 0, 0, 0.18);
+  transition: var(--transition);
+}
+
+.search-bar::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: rgba(233, 69, 96, 0.9);
+  box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.16);
+  background: rgba(255, 255, 255, 0.12);
+}
+
 /* PRODUCT GRID */
 .grid {
   display: grid;
@@ -444,24 +473,99 @@ tr:hover {
 }
 
 /* FOOTER */
-footer {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: var(--text-light);
-  text-align: center;
-  padding: 3rem 2rem;
-  margin-top: 4rem;
+.footer {
   position: relative;
+  background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(30, 0, 10, 0.95));
+  color: var(--text-light);
+  padding: 3rem 0 2rem;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-footer::before {
+.footer::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(45deg, var(--highlight-color), #ff6b6b);
+  top: -20%;
+  left: 50%;
+  width: 140%;
+  height: 170%;
+  background: radial-gradient(circle at top, rgba(233, 69, 96, 0.25), transparent 55%);
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: 0.55;
 }
+
+.footer .container {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 220px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.footer-section p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-section a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-section a:hover {
+  color: var(--highlight-color);
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: center;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer-bottom {
+    justify-content: flex-start;
+  }
 }
 
 /* RESPONSIVE DESIGN */

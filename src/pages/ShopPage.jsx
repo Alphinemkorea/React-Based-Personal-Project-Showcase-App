@@ -18,14 +18,15 @@ export default function ShopPage() {
     <div>
       <h1>Gaming Tech Store </h1>
 
-      <input
-        type="text"
-        placeholder="Search products..."
-        value={search}
-        onChange={(e) =>
-          setSearch(e.target.value)
-        }
-      />
+      <div className="search-container">
+        <input
+          className="search-bar"
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
 
       <div className="grid">
         {filteredProducts.map((p) => (
