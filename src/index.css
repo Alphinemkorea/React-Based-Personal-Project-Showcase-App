@@ -181,7 +181,7 @@ nav a:hover::after {
   background: linear-gradient(45deg, var(--highlight-color), #ff6b6b);
   border-radius: 2px;
 }
-}
+
 
 /* SEARCH INPUT */
 input {
