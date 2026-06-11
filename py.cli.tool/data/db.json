@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice",
+      "email": null
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Website",
+      "description": null,
+      "due_date": null,
+      "owner_id": 1,
+      "task_ids": [
+        1
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Design",
+      "status": "in-progress",
+      "assigned_to": null,
+      "project_id": 1,
+      "contributor_ids": []
+    }
+  ]
+}
